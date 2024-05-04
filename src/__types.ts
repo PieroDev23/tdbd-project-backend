@@ -3,7 +3,7 @@ import { Router } from "express";
 
 export type Route = {
     name: string;
-    router: Router | null
+    router: Router
 }
 
 export enum WeaponTypes {
@@ -30,9 +30,13 @@ export enum Leagues {
     RADIANT = 'RADIANT'
 }
 
-
 export enum GameModes {
     DEATH_MATCH = 'DTM',
     RANKED = 'RNK',
     CUSTOM = 'CUS'
+}
+
+export enum Behaviors {
+    CHEATER = 'CHEATER',
+    NORMAL = 'NORMAL'
 }

@@ -4,14 +4,13 @@ import 'dotenv/config';
 import express, { Express } from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
-import { APIRoutes } from './routes/api.routes';
+import { APIRoutes } from './api.routes';
 import { AppDataSource } from './database/data-source';
 
 export class ValorantTrackerApp {
 
     private _app: Express;
     private _port: string | number
-    private _apiVersion = 'v1';
 
     constructor() {
         const { APP_EXPRESS_PORT } = process.env;
@@ -25,9 +24,10 @@ export class ValorantTrackerApp {
     }
 
     routes(): void {
-        const routes = APIRoutes.routes();
+        const { routes, apiVersion } = new APIRoutes();
+
         for (const { name, router } of routes) {
-            this._app.use(`api/${this._apiVersion}/${name}`, router!);
+            this._app.use(`api/${apiVersion}/${name}`, router);
         }
     }
 
@@ -35,7 +35,6 @@ export class ValorantTrackerApp {
         this._app.use(cors());
         this._app.use(morgan('dev'));
         this._app.use(express.json());
-        this._app.use(express.static('/public'));
     }
 
     async dbConnection() {
@@ -44,7 +43,7 @@ export class ValorantTrackerApp {
             console.log(`✅ Succesfully connected to the database`);
         } catch (error) {
             if (error instanceof Error) {
-                console.log(`[Error while connecting to the database ${error.name}]: ${error.message}`);
+                console.log(`🟥 [Error while connecting to the database ${error.name}]: ${error.message}`);
             }
         }
     }

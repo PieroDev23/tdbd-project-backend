@@ -1,9 +1,8 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm"
-import { HasUpdateCreateDateColumns } from "../models/update-create-columns.model";
 import { WeaponTypes } from "../__types";
 
 @Entity({ name: 'weapons' })
-export class Weapon extends HasUpdateCreateDateColumns {
+export class Weapon {
 
     @PrimaryGeneratedColumn('uuid', { name: 'weapon_id' })
     weaponId: string;
@@ -33,4 +32,10 @@ export class Weapon extends HasUpdateCreateDateColumns {
 
     @Column({ type: 'varchar', nullable: false })
     accuracy: string;
+
+    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', name: 'created_at' })
+    createdAt: Date;
+
+    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP', name: 'updated_at' })
+    updatedAt: Date;
 }

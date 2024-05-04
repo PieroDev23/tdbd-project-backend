@@ -1,9 +1,8 @@
 import { Column, Entity, PrimaryColumn } from "typeorm"
-import { HasUpdateCreateDateColumns } from "../models/update-create-columns.model";
 import { AgentRoles } from "../__types";
 
 @Entity({ name: 'agents' })
-export class Agent extends HasUpdateCreateDateColumns {
+export class Agent {
 
     @PrimaryColumn({ type: 'uuid', name: 'agent_id' })
     agentId: string;
@@ -41,5 +40,4 @@ export class Agent extends HasUpdateCreateDateColumns {
 
     @Column({ type: 'varchar', nullable: false })
     ultimate: string;
-
 }
