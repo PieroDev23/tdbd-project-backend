@@ -10,7 +10,6 @@ export class AuthRouter extends BaseRouter {
 
     constructor() {
         super();
-
     }
 
     onInitRoutes(): void {
