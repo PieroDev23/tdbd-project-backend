@@ -6,12 +6,14 @@ import { LoginController, RegisterController } from "../controllers/auth";
 
 export class AuthRouter extends BaseRouter {
 
+    public path: string = '/auth';
+
     constructor() {
         super();
-        this.path = '/auth';
+
     }
 
-    initializeRoutes(): void {
+    onInitRoutes(): void {
         this._router.post('/login',
             (req: Request, res: Response) => new LoginController().execute(req, res));
 

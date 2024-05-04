@@ -7,12 +7,12 @@ export abstract class BaseRouter {
 
     constructor() {
         this._router = Router();
-        this.initializeRoutes();
+        this.onInitRoutes();
     }
 
     /**
      * Initilize your routes with a respective HTTP Mehtod.
      */
-    abstract initializeRoutes(): void;
+    abstract onInitRoutes(): void;
 
 }
