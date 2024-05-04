@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { BaseRouter } from "../models/router.model";
+import { BaseRouter } from "../models";
 import { LoginController, RegisterController } from "../controllers/auth";
 
 
