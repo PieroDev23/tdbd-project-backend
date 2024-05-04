@@ -1,4 +1,4 @@
-import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm"
+import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Player } from "./player.entity";
 
 @Entity({ name: 'teams' })
@@ -10,7 +10,11 @@ export class Team {
     teamColor: string;
 
     @ManyToMany((type) => Player)
-    @JoinTable({ name: 'team_players' })
+    @JoinTable({
+        name: 'team_players',
+        joinColumn: { name: 'team_id' },
+        inverseJoinColumn: { name: 'player_id' }
+    })
     players: Player[];
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', name: 'created_at' })
