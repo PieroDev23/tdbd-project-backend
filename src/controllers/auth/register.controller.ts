@@ -1,13 +1,12 @@
 import { Request, Response } from "express";
+import { BaseController } from "../../models";
 
 
 
-export class RegisterController {
+export class RegisterController extends BaseController {
 
-    static handler(req: Request, res: Response) {
-        res.json({
-            ok: true,
-            data: 'Hello'
-        })
+    protected async response(req: Request, res: Response) {
+        throw new Error("Method not implemented.");
     }
+
 }

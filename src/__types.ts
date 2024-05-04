@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { BaseRouter } from "./models";
 
 
 export type Route = {
@@ -40,3 +41,5 @@ export enum Behaviors {
     CHEATER = 'CHEATER',
     NORMAL = 'NORMAL'
 }
+
+export type InstanceableClass<T> = new () => T;

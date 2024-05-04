@@ -1,27 +1,21 @@
-import { LoginController } from "../controllers/auth/login.controller";
-import { RegisterController } from "../controllers/auth/register.controller";
+import { Request, Response } from "express";
 import { BaseRouter } from "../models/router.model";
-import { Route } from "../__types";
+import { LoginController, RegisterController } from "../controllers/auth";
+
 
 
 export class AuthRouter extends BaseRouter {
 
-    public routeName: string = '/auth';
-
     constructor() {
         super();
+        this.path = '/auth';
     }
 
     initializeRoutes(): void {
-        this._router.post('/register', LoginController.handler);
-        this._router.post('/login', RegisterController.handler);
-    }
+        this._router.post('/login',
+            (req: Request, res: Response) => new LoginController().execute(req, res));
 
-    /**
-     * Exposes the route on a simple object cotaining the name and the current Route object
-     * @returns {Route}
-     */
-    static get route(): Route {
-        return BaseRouter.provideRoute(AuthRouter);
+        this._router.post('/register',
+            (req: Request, res: Response) => new RegisterController().execute(req, res))
     }
 }

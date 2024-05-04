@@ -1,12 +1,9 @@
 import { Router } from "express";
-import { RouterClass } from "../__interfaces";
-import { Singleton } from "./singleton.model";
-import { Route } from "../__types";
 
-export abstract class BaseRouter implements RouterClass {
+export abstract class BaseRouter {
 
-    protected _router: Router;
-    public routeName: string;
+    public _router: Router;
+    public path: string;
 
     constructor() {
         this._router = Router();
@@ -18,13 +15,4 @@ export abstract class BaseRouter implements RouterClass {
      */
     abstract initializeRoutes(): void;
 
-    protected static provideRoute(RouterClass: new () => BaseRouter): Route {
-
-        const { routeName, _router } = Singleton.getInstance(RouterClass);
-
-        return {
-            name: routeName,
-            router: _router
-        }
-    }
 }
