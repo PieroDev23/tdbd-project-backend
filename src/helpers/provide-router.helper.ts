@@ -1,5 +1,4 @@
-import { BaseRouter } from "../models";
-import { Singleton } from "../models/singleton.model";
+import { BaseRouter, Singleton } from "../models";
 
 export const provideRouter = (RouterClass: new () => BaseRouter) => {
     const { path, _router } = Singleton.getInstance(RouterClass);
