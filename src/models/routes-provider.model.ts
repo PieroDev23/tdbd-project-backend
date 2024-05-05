@@ -1,7 +1,5 @@
 import { InstanceableClass } from "../__types";
 import { BaseRouter } from "./router.model";
-import { Singleton } from "./singleton.model";
-
 
 
 export abstract class RoutesProvider {
@@ -11,7 +9,7 @@ export abstract class RoutesProvider {
 
     get routes() {
         return this._routers.map(RouterClass => {
-            const { path, _router } = Singleton.getInstance(RouterClass);
+            const { path, _router } = new RouterClass();
             return {
                 pathName: path,
                 router: _router

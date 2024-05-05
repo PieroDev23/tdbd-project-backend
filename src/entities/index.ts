@@ -1,3 +1,4 @@
+export { User } from './user.entity';
 export { Agent } from './agent.entity'
 export { BlackList } from './blacklist.entity';
 export { Map } from './map.entity';

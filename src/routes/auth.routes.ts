@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { BaseRouter } from "../models";
 import { LoginController, RegisterController } from "../controllers/auth";
+import { loginMiddlware } from "../middlewares";
 
 
 
@@ -14,6 +15,7 @@ export class AuthRouter extends BaseRouter {
 
     onInitRoutes(): void {
         this._router.post('/login',
+            loginMiddlware,
             (req: Request, res: Response) => new LoginController().execute(req, res));
 
         this._router.post('/register',
