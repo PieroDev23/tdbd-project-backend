@@ -1,9 +1,9 @@
 import 'dotenv/config';
 import 'reflect-metadata';
-
 import cors from 'cors';
 import express, { Express } from 'express';
 import morgan from 'morgan';
+
 import { AppDataSource } from './database/data-source';
 import { RouterManager } from './router-manager';
 

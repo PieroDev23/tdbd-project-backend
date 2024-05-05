@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { BaseRouter } from "../models";
 import { LoginController, RegisterController } from "../controllers/auth";
-import { loginMiddlware } from "../middlewares";
+import { loginMiddlware, registerMiddleware } from "../middlewares";
 
 
 
@@ -19,6 +19,7 @@ export class AuthRouter extends BaseRouter {
             (req: Request, res: Response) => new LoginController().execute(req, res));
 
         this._router.post('/register',
+            registerMiddleware,
             (req: Request, res: Response) => new RegisterController().execute(req, res))
     }
 }

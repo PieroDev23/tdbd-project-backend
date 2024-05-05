@@ -8,7 +8,7 @@ export class User {
     userId: string;
 
     @Column('varchar')
-    username: string;
+    username: string; 
 
     @Column('varchar')
     email: string;
