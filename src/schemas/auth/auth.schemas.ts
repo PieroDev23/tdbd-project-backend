@@ -31,11 +31,15 @@ export const RegisterSchema = z.object({
 export type LoginRequest = z.infer<typeof LoginSchema>;
 export type RegisterRequest = z.infer<typeof RegisterSchema>;
 
-
 export interface RegisterResponse extends Partial<ControllerResponse> {
-    data?: {
+    data: {
         token: string;
         user: Omit<User, 'createdAt' | 'updatedAt' | 'hashPassword'>;
-    }
+    } | null
 }
-
+export interface LoginResponse extends Partial<ControllerResponse> {
+    data: {
+        token: string;
+        user: Omit<User, 'createdAt' | 'updatedAt' | 'hashPassword'>;
+    } | null
+}

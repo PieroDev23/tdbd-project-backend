@@ -17,12 +17,11 @@ export class AuthService {
         return bcrypt.compareSync(incomingPassword, savedPassword);
     }
 
-    async registerUser(newUser: RegisterRequest): Promise<User> {
+    async registerUser(userRegisterRequest: RegisterRequest): Promise<User> {
         const userRepo = new UserRepository();
-        const user = await userRepo.create(newUser);
+        const user = await userRepo.create(userRegisterRequest);
 
         return await userRepo.save(user);
     }
-
 
 }

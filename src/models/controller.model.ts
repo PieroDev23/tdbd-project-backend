@@ -1,10 +1,19 @@
-import { Response, Request } from "express";
-import { processError } from "../helpers";
+import { Request, Response } from "express";
+import { HTTP_CODE_SERVER_ERROR, HTTP_MESSAGES } from "../__constants";
+import { TypedResponse } from "../__types";
 
 
 export abstract class BaseController {
 
     protected abstract response(req: Request, res: Response): Promise<void | any>
+
+    protected serverErrorResponse = {
+        code: HTTP_CODE_SERVER_ERROR,
+        response: {
+            message: HTTP_MESSAGES[HTTP_CODE_SERVER_ERROR],
+            data: null
+        }
+    }
 
     public async execute(req: Request, res: Response): Promise<void> {
         try {
@@ -12,33 +21,13 @@ export abstract class BaseController {
         } catch (error) {
             console.log('[BASE CONTROLLER] Uncaught controller error');
             console.log(error);
-            this.serverError(res, error)
+            this.jsonResponse(res, this.serverErrorResponse);
         }
     }
 
-    protected json(res: Response, code: number, message: unknown) {
-        res.status(code).json(message);
+    protected jsonResponse<T>(res: TypedResponse<T>, payload: { code: number; response: T }) {
+        const { code, response } = payload;
+        res.status(code).json(response);
     }
 
-    protected ok<T>(res: Response, payload: T) {
-        this.json(res, 200, payload);
-    }
-
-    protected created(res: Response, payload?: unknown) {
-        this.json(res, 201, !payload ? { msg: 'created succesfully' } : payload);
-    }
-
-    protected badRequest<T>(res: Response, payload?: T) {
-        this.json(res, 400, !payload ? { msg: 'bad request' } : payload);
-    }
-
-    protected unauthorized(res: Response, payload?: unknown) {
-        this.json(res, 401, !payload ? { msg: 'bad request' } : payload);
-    }
-
-    protected serverError(res: Response, error: unknown) {
-        const { message } = processError(error);
-        console.error('[SERVER ERROR]', error)
-        this.json(res, 500, { msg: 'internal server error', error: message });
-    }
 }

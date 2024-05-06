@@ -1,5 +1,10 @@
 
-import { EMAIL_ALREADY_EXISTS_MESSAGE, HTTP_CODE_OK, HTTP_MESSAGES } from "../../__constants";
+import {
+    EMAIL_ALREADY_EXISTS_MESSAGE,
+    HTTP_CODE_CLIENT_ERROR,
+    HTTP_CODE_OK,
+    HTTP_MESSAGES
+} from "../../__constants";
 import { TypedRequest, TypedResponse } from "../../__types";
 import { processError, useService } from "../../helpers";
 import { BaseController } from "../../models";
@@ -20,26 +25,35 @@ export class RegisterController extends BaseController {
             const user = await this._as.verifyUserEmail(body.email);
 
             if (user) {
-                return res.status(400).json({
-                    ok: false,
-                    message: EMAIL_ALREADY_EXISTS_MESSAGE,
+                return this.jsonResponse(res, {
+                    code: HTTP_CODE_CLIENT_ERROR,
+                    response: {
+                        ok: false,
+                        message: EMAIL_ALREADY_EXISTS_MESSAGE,
+                        data: null
+                    }
                 });
             }
 
             const { createdAt, updatedAt, ...restUser } = await this._as.registerUser(body);
             const token = this._ts.genJWT(restUser);
 
-            return res.status(HTTP_CODE_OK).json({
-                ok: true,
-                message: HTTP_MESSAGES[HTTP_CODE_OK],
-
-            })
-
+            return this.jsonResponse(res, {
+                code: HTTP_CODE_OK,
+                response: {
+                    ok: true,
+                    message: HTTP_MESSAGES[HTTP_CODE_OK],
+                    data: {
+                        token,
+                        user: restUser
+                    }
+                }
+            });
 
         } catch (error) {
             const { message, name } = processError(error);
-            this.serverError(res, { message });
             console.log(`[Error Ocurring on ${RegisterController.name} (ERROR NAME: ${name})]: ${message}`);
+            return this.jsonResponse(res, this.serverErrorResponse);
         }
     }
 
