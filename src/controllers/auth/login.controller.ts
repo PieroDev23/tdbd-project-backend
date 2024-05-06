@@ -1,5 +1,5 @@
 
-import { BAD_CREDENTALS_MESSAGE, HTTP_CODE_CLIENT_ERROR, HTTP_CODE_OK, HTTP_CODE_UNAUTHORIZE, HTTP_MESSAGES } from "../../__constants";
+import { BAD_CREDENTALS_MESSAGE, HTTP_CODE_OK, HTTP_CODE_UNAUTHORIZE, HTTP_MESSAGES } from "../../__constants";
 import { TypedRequest, TypedResponse } from "../../__types";
 import { processError, useService } from "../../helpers";
 import { BaseController } from "../../models";
@@ -10,13 +10,13 @@ import { AuthService, JWTService } from "../../services";
 export class LoginController extends BaseController {
 
     // using services
-    private _authService: AuthService = useService(AuthService);
-    private _tokenService: JWTService = useService(JWTService);
+    private _as: AuthService = useService(AuthService);
+    private _jwts: JWTService = useService(JWTService);
 
     protected async response(req: TypedRequest<LoginRequest>, res: TypedResponse<LoginResponse>) {
         try {
             const { password, email } = req.body;
-            const user = await this._authService.verifyUserEmail(email);
+            const user = await this._as.verifyUserEmail(email);
 
             if (!user) {
                 return this.jsonResponse(res, {
@@ -31,7 +31,7 @@ export class LoginController extends BaseController {
 
             const { createdAt, updatedAt, ...restUser } = user;
 
-            const passwordMatch = this._authService.comparePasswords(password, user.password);
+            const passwordMatch = this._as.comparePasswords(password, user.password);
             if (!passwordMatch) {
                 return this.jsonResponse(res, {
                     code: HTTP_CODE_UNAUTHORIZE,
@@ -43,7 +43,7 @@ export class LoginController extends BaseController {
                 });
             }
 
-            const token = this._tokenService.genJWT(user);
+            const token = this._jwts.genJWT(user);
 
             return this.jsonResponse(res, {
                 code: HTTP_CODE_OK,

@@ -16,7 +16,7 @@ export class RegisterController extends BaseController {
 
     // using services
     private _as: AuthService = useService(AuthService);
-    private _ts: JWTService = useService(JWTService);
+    private _jwts: JWTService = useService(JWTService);
 
     protected async response(req: TypedRequest<RegisterRequest>, res: TypedResponse<RegisterResponse>) {
         try {
@@ -36,7 +36,7 @@ export class RegisterController extends BaseController {
             }
 
             const { createdAt, updatedAt, ...restUser } = await this._as.registerUser(body);
-            const token = this._ts.genJWT(restUser);
+            const token = this._jwts.genJWT(restUser);
 
             return this.jsonResponse(res, {
                 code: HTTP_CODE_OK,
