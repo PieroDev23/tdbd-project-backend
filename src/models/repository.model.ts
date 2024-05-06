@@ -1,7 +1,6 @@
 import { ObjectLiteral, Repository } from "typeorm";
 
 
-
 export abstract class BaseRepository<T extends ObjectLiteral> {
 
     protected abstract _repo: Repository<T>;

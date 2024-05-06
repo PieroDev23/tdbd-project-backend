@@ -1,32 +1,28 @@
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
 
 import { User } from "../../entities";
 import { UserRepository } from "../../repositories";
-import { RegisterRequest } from '../../__types';
+import { RegisterRequest } from '../../schemas';
 
 export class AuthService {
 
-    static async verifyUserEmail(email: string): Promise<User | null> {
+    async verifyUserEmail(email: string): Promise<User | null> {
         const userRepo = new UserRepository();
         const user = await userRepo.findOneBy({ email });
 
         return user;
     }
 
-    static genJWT(data: any): string {
-        const { APP_JWT_SECRET } = process.env;
-        return jwt.sign({ ...data }, APP_JWT_SECRET!, { expiresIn: '1h' });
-    }
-
-    static comparePasswords(incomingPassword: string, savedPassword: string): boolean {
+    comparePasswords(incomingPassword: string, savedPassword: string): boolean {
         return bcrypt.compareSync(incomingPassword, savedPassword);
     }
 
-    static async registerUser(newUser: RegisterRequest) {
+    async registerUser(newUser: RegisterRequest): Promise<User> {
         const userRepo = new UserRepository();
         const user = await userRepo.create(newUser);
 
         return await userRepo.save(user);
     }
+
+
 }

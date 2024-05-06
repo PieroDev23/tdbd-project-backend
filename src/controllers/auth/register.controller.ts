@@ -1,30 +1,38 @@
-import { Response } from "express";
-import { RegisterRequest, TypedRequest } from "../../__types";
-import { processError } from "../../helpers";
-import { BaseController } from "../../models";
-import { AuthService } from "../../services";
 
+import { EMAIL_ALREADY_EXISTS_MESSAGE, HTTP_CODE_OK, HTTP_MESSAGES } from "../../__constants";
+import { TypedRequest, TypedResponse } from "../../__types";
+import { processError, useService } from "../../helpers";
+import { BaseController } from "../../models";
+import { RegisterRequest, RegisterResponse } from '../../schemas';
+import { AuthService, JWTService } from "../../services";
 
 
 export class RegisterController extends BaseController {
 
-    protected async response(req: TypedRequest<RegisterRequest>, res: Response) {
-        try {
-            const body = req.body;
+    // using services
+    private _as: AuthService = useService(AuthService);
+    private _ts: JWTService = useService(JWTService);
 
-            const user = await AuthService.verifyUserEmail(body.email);
+    protected async response(req: TypedRequest<RegisterRequest>, res: TypedResponse<RegisterResponse>) {
+        try {
+
+            const body = req.body;
+            const user = await this._as.verifyUserEmail(body.email);
 
             if (user) {
-                return this.badRequest(res, { message: 'This email is already registered' });
+                return res.status(400).json({
+                    ok: false,
+                    message: EMAIL_ALREADY_EXISTS_MESSAGE,
+                });
             }
 
-            const { createdAt, updatedAt, ...restUser } = await AuthService.registerUser(body);
-            const token = AuthService.genJWT(restUser);
+            const { createdAt, updatedAt, ...restUser } = await this._as.registerUser(body);
+            const token = this._ts.genJWT(restUser);
 
-            return this.ok(res, {
+            return res.status(HTTP_CODE_OK).json({
                 ok: true,
-                token,
-                user: restUser
+                message: HTTP_MESSAGES[HTTP_CODE_OK],
+
             })
 
 

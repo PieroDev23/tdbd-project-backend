@@ -1,7 +1,6 @@
-import { Request, Router } from "express";
-import { z } from 'zod';
-import { LoginSchema, RegisterSchema } from "./schemas";
-import { Query } from 'express-serve-static-core';
+import { Request, Router, Response } from "express";
+import { Query, Send } from 'express-serve-static-core';
+
 
 export type Route = {
     name: string;
@@ -45,11 +44,12 @@ export enum Behaviors {
 
 export type InstanceableClass<T> = new () => T;
 
-export type LoginRequest = z.infer<typeof LoginSchema>;
-export type RegisterRequest = z.infer<typeof RegisterSchema>
 
 export interface TypedRequest<T, U extends Query = any> extends Request {
     body: T,
     query: U
 }
 
+export interface TypedResponse<ResBody> extends Response {
+  json: Send<ResBody, this>;
+}

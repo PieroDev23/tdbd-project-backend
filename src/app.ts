@@ -1,16 +1,16 @@
-import 'dotenv/config';
-import 'reflect-metadata';
 import cors from 'cors';
+import 'dotenv/config';
 import express, { Express } from 'express';
 import morgan from 'morgan';
+import 'reflect-metadata';
 
+import { AppRouterProvider } from './app-router-provider';
 import { AppDataSource } from './database/data-source';
-import { RouterManager } from './router-manager';
 
 export class ValorantTrackerApp {
 
     private _app: Express;
-    private _port: string | number
+    private _port: string | number;
 
     constructor() {
         const { APP_EXPRESS_PORT } = process.env;
@@ -24,10 +24,10 @@ export class ValorantTrackerApp {
     }
 
     routes(): void {
-        const { routes, apiVersion } = new RouterManager();
+        const { routes, apiVersion } = new AppRouterProvider();
 
         for (const { pathName, router } of routes) {
-            this._app.use(`api/${apiVersion}/${pathName}`, router);
+            this._app.use(`/api/${apiVersion}/${pathName}`, router);
         }
     }
 

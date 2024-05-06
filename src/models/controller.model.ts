@@ -28,7 +28,7 @@ export abstract class BaseController {
         this.json(res, 201, !payload ? { msg: 'created succesfully' } : payload);
     }
 
-    protected badRequest(res: Response, payload?: unknown) {
+    protected badRequest<T>(res: Response, payload?: T) {
         this.json(res, 400, !payload ? { msg: 'bad request' } : payload);
     }
 
