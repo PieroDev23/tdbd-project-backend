@@ -36,7 +36,9 @@ export abstract class BaseRouter {
         });
     }
 
-
+    /**
+    * Setter method, set current router routes
+    */
     protected set routes(routes: PathRoute[]) {
         this._routes = routes;
         this.onInitRouter();
