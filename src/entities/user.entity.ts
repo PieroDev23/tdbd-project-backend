@@ -8,7 +8,7 @@ export class User {
     userId: string;
 
     @Column('varchar')
-    username: string; 
+    username: string;
 
     @Column('varchar')
     email: string;
@@ -23,8 +23,8 @@ export class User {
     updatedAt: Date;
 
     @BeforeInsert()
-    static hashPassword(password: string): string {
+    hashPassword(): string {
         const salt = bcrypt.genSaltSync(12);
-        return bcrypt.hashSync(password, salt);
+        return bcrypt.hashSync(this.password, salt);
     }
 }
