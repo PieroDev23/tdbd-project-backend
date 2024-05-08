@@ -1,11 +1,11 @@
-import cors from 'cors';
-import 'dotenv/config';
-import express, { Express } from 'express';
-import morgan from 'morgan';
-import 'reflect-metadata';
+import cors from "cors";
+import "dotenv/config";
+import express, { Express } from "express";
+import morgan from "morgan";
+import "reflect-metadata";
 
-import { AppRouterProvider } from './app-router-provider';
-import { AppDataSource } from './database/data-source';
+import { AppRoutersProvider } from "./app-routers-provider";
+import { AppDataSource } from "./database/data-source";
 
 export class ValorantTrackerApp {
 
@@ -24,7 +24,7 @@ export class ValorantTrackerApp {
     }
 
     routes(): void {
-        const { routes, apiVersion } = new AppRouterProvider();
+        const { routes, apiVersion } = new AppRoutersProvider();
 
         for (const { pathName, router } of routes) {
             this._app.use(`/api/${apiVersion}/${pathName}`, router);
