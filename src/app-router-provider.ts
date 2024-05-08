@@ -8,9 +8,9 @@ export class AppRouterProvider extends RoutesProvider {
     constructor() {
         super();
 
-        // initiliazing my routers
-        this._routers = [
+        this.routers = [
             AuthRouter,
         ]
     }
+
 }

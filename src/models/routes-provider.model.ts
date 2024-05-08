@@ -3,14 +3,14 @@ import { BaseRouter } from "./router.model";
 
 
 export abstract class RoutesProvider {
-    
+
     abstract apiVersion: string;
-    protected _routers: InstanceableClass<BaseRouter>[] = [];
+    private _routers: InstanceableClass<BaseRouter>[] = [];
 
     /**
-     * map my array if routers and return an new array that contains the path of the
-     * router and the router itself
-     */
+    * map my array if routers and return an new array that contains the path of the
+    * router and the router itself
+    */
     get routes() {
         return this._routers.map(RouterClass => {
             const { path, _router } = new RouterClass();
@@ -19,5 +19,9 @@ export abstract class RoutesProvider {
                 router: _router
             }
         })
+    }
+
+    protected set routers(routers: InstanceableClass<BaseRouter>[]) {
+        this._routers = routers;
     }
 }

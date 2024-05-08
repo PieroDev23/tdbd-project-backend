@@ -1,7 +1,7 @@
 import { NextFunction, Response } from "express";
-import { LoginRequest, RegisterRequest, TypedRequest } from "../../__types";
-import { LoginSchema, RegisterSchema } from "../../schemas";
+import { LoginRequest, LoginSchema, RegisterRequest, RegisterSchema } from "../../schemas";
 import { formatZodError } from "../../helpers";
+import { TypedRequest } from "../../__types";
 
 
 export const loginMiddlware = (req: TypedRequest<LoginRequest>, res: Response, next: NextFunction) => {
