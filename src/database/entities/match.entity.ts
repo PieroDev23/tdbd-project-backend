@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from "typeorm"
-import { GameModes } from "../__types";
+import { GameModes } from "../../__types";
 
 @Entity({ name: 'matches' })
 export class Match {

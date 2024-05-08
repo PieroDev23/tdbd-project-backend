@@ -1,5 +1,5 @@
 import { Column, Entity, PrimaryColumn } from "typeorm"
-import { AgentRoles } from "../__types";
+import { AgentRoles } from "../../__types";
 
 @Entity({ name: 'agents' })
 export class Agent {

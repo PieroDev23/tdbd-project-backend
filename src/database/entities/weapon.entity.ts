@@ -1,5 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm"
-import { WeaponTypes } from "../__types";
+import { WeaponTypes } from "../../__types";
 
 @Entity({ name: 'weapons' })
 export class Weapon {

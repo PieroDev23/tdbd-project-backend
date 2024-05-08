@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
 
-import { User } from "../../entities";
+import { User } from "../../database/entities";
 
 import { RegisterRequest } from '../../schemas';
 import { UserRepository } from '../../database/repositories';

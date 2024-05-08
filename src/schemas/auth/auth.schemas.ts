@@ -4,7 +4,7 @@ import {
     REQUIRED_PASSWORD_MESSAGE,
     REQUIRED_USERNAME_MESSAGE
 } from '../../__constants';
-import { User } from '../../entities';
+import { User } from '../../database/entities';
 
 
 // privated

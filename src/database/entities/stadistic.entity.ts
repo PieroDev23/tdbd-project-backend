@@ -1,7 +1,7 @@
 import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm"
 import { Player } from "./player.entity";
 import { Match } from "./match.entity";
-import { Behaviors } from "../__types";
+import { Behaviors } from "../../__types";
 
 @Entity({ name: 'stadistics' })
 export class Stadistic {

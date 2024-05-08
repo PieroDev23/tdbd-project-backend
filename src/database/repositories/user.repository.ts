@@ -1,6 +1,6 @@
 import { Repository, FindOptionsWhere } from "typeorm";
 import { AppDataSource } from "../data-source";
-import { User } from "../../entities";
+import { User } from "../entities";
 import { BaseRepository } from "../../models";
 
 

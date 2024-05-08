@@ -1,5 +1,5 @@
 import { Column, Entity, JoinColumn, OneToOne, PrimaryColumn } from "typeorm"
-import { Leagues } from "../__types";
+import { Leagues } from "../../__types";
 import { Weapon } from "./weapon.entity";
 import { Agent } from "./agent.entity";
 
