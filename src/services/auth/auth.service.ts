@@ -1,8 +1,9 @@
 import bcrypt from 'bcryptjs';
 
 import { User } from "../../entities";
-import { UserRepository } from "../../repositories";
+
 import { RegisterRequest } from '../../schemas';
+import { UserRepository } from '../../database/repositories';
 
 export class AuthService {
 

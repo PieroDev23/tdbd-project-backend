@@ -23,8 +23,8 @@ export class User {
     updatedAt: Date;
 
     @BeforeInsert()
-    hashPassword(): string {
+    hashPassword(): void {
         const salt = bcrypt.genSaltSync(12);
-        return bcrypt.hashSync(this.password, salt);
+        this.password = bcrypt.hashSync(this.password, salt);
     }
 }

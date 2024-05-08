@@ -1,7 +1,7 @@
 import { Repository, FindOptionsWhere } from "typeorm";
-import { AppDataSource } from "../database/data-source";
-import { User } from "../entities";
-import { BaseRepository } from "../models";
+import { AppDataSource } from "../data-source";
+import { User } from "../../entities";
+import { BaseRepository } from "../../models";
 
 
 export class UserRepository extends BaseRepository<User> {
@@ -15,7 +15,7 @@ export class UserRepository extends BaseRepository<User> {
 
     async create(args: Partial<User>): Promise<User> {
         const user = this._repo.create(args);
-        user.password = user.hashPassword();
+        user.hashPassword();
         return user;
     }
 

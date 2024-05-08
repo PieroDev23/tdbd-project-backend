@@ -6,6 +6,7 @@ import "reflect-metadata";
 
 import { AppRoutersProvider } from "./app-routers-provider";
 import { AppDataSource } from "./database/data-source";
+import { runSeeders } from "typeorm-extension";
 
 export class ValorantTrackerApp {
 
@@ -40,6 +41,11 @@ export class ValorantTrackerApp {
     async dbConnection() {
         try {
             await AppDataSource.initialize();
+
+            if (process.env.APP_CURRENT_ENV === 'dev') {
+                runSeeders(AppDataSource);
+            }
+
             console.log(`✅ Succesfully connected to the database`);
         } catch (error) {
             if (error instanceof Error) {
