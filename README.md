@@ -83,7 +83,7 @@ Te deberá de aparecer los siguientes mensajes en la terminal.
 
 ## APIs disponibles
 
-https://localhost:{{APP_PORT}}/api/v1/auth/login
+http://localhost:{{APP_PORT}}/api/v1/auth/login
 
 ```
     {
@@ -92,7 +92,7 @@ https://localhost:{{APP_PORT}}/api/v1/auth/login
     }
 ```
 
-https://localhost:{{APP_PORT}}/api/v1/auth/register
+http://localhost:{{APP_PORT}}/api/v1/auth/register
 
 ```
     {
