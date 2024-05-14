@@ -25,7 +25,7 @@ Para levantar este proyecto se deben de setear la siguientes variables
 
 `DB_NAME` nombre de tu bd
 
-`DB_PORT`=3306
+`DB_PORT` puerto donde corre la bd
 
 `DB_USER` usuario de tu bd
 
