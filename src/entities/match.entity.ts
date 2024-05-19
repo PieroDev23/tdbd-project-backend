@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from "typeorm"
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { GameModes } from "../__types";
+import { Map } from "./map.entity";
 
 @Entity({ name: 'matches' })
 export class Match {
@@ -13,8 +14,11 @@ export class Match {
     @Column({ type: 'datetime', nullable: false, name: 'date_end' })
     dateEnd: Date;
 
-    @Column({ type: 'enum', nullable: false, enum: GameModes, name: 'game_mode' })
+    @Column({ type: 'enum', nullable: false, enum: GameModes, name: 'game_mode', default: GameModes.RANKED })
     gameMode: GameModes;
+
+    @OneToOne(() => Map)
+    map: Map;
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', name: 'created_at' })
     createdAt: Date;
