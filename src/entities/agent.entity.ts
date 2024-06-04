@@ -41,6 +41,9 @@ export class Agent {
     @Column({ type: 'varchar', nullable: false })
     ultimate: string;
 
+    @Column({ type: 'varchar', nullable: true, name: 'agent_url' })
+    agentUrl: string;
+
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', name: 'created_at' })
     createdAt: Date;
 
