@@ -1,6 +1,7 @@
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, JoinTable, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { GameModes } from "../__types";
 import { Map } from "./map.entity";
+import { Team } from "./team.entity";
 
 @Entity({ name: 'matches' })
 export class Match {
@@ -17,8 +18,12 @@ export class Match {
     @Column({ type: 'enum', nullable: false, enum: GameModes, name: 'game_mode', default: GameModes.RANKED })
     gameMode: GameModes;
 
-    @OneToOne(() => Map)
+    @OneToOne((type) => Map, { eager: true, cascade: true })
+    @JoinColumn({ name: 'map_id' })
     map: Map;
+
+    @OneToMany(() => Team, (team) => team.players)
+    teams: Team[];
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', name: 'created_at' })
     createdAt: Date;
