@@ -1,7 +1,8 @@
-import { Column, Entity, JoinColumn, OneToOne, PrimaryColumn } from "typeorm"
+import { Column, Entity, JoinColumn, JoinTable, ManyToMany, OneToOne, PrimaryColumn } from "typeorm";
 import { Leagues } from "../__types";
-import { Weapon } from "./weapon.entity";
 import { Agent } from "./agent.entity";
+import { Weapon } from "./weapon.entity";
+import { Player } from "./player.entity";
 
 @Entity({ name: 'players_profiles' })
 export class PlayerProfile {
@@ -24,17 +25,32 @@ export class PlayerProfile {
     @Column({ type: 'enum', nullable: false, enum: Leagues, default: Leagues.UNRANKED })
     league: string;
 
-    @OneToOne((type) => Agent)
-    @JoinColumn({ name: 'main_character' })
-    mainCharacter: Agent;
+    @ManyToMany(type => Agent)
+    @JoinTable({
+        name: "player_profile_agents",
+        joinColumn: { name: "profile_id", referencedColumnName: "profileId" },
+        inverseJoinColumn: { name: "agent_id", referencedColumnName: "agentId" }
+    })
+    mainCharacters: Agent[];
 
-    @OneToOne((type) => Weapon)
-    @JoinColumn({ name: 'main_weapon' })
-    mainWeapon: Weapon;
+    @ManyToMany(type => Weapon)
+    @JoinTable({
+        name: "player_profile_weapons",
+        joinColumn: { name: "profile_id", referencedColumnName: "profileId" },
+        inverseJoinColumn: { name: "weapon_id", referencedColumnName: "weaponId" }
+    })
+    mainWeapons: Weapon[];
+
+    @OneToOne(type => Player)
+    @JoinColumn({ name: 'player_id' })
+    player: Player;
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', name: 'created_at' })
     createdAt: Date;
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP', name: 'updated_at' })
     updatedAt: Date;
+
+    @Column({ type: 'int', default: null })
+    mmr: number;
 }

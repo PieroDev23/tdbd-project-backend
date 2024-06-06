@@ -1,7 +1,7 @@
-import { Repository, FindOptionsWhere, DataSource } from "typeorm";
+import { FindOneOptions, FindOptionsWhere, Repository } from "typeorm";
+import { AppDataSource } from "../database/data-source";
 import { Player } from "../entities";
 import { BaseRepository } from "../models";
-import { AppDataSource } from "../database/data-source";
 
 
 
