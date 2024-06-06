@@ -1,4 +1,4 @@
-import { Column, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Player } from "./player.entity";
 import { Match } from "./match.entity";
 
@@ -19,6 +19,7 @@ export class Team {
     players: Player[];
 
     @ManyToOne(type => Match, (match) => match.teams)
+    @JoinColumn({ name: 'match_id' })
     match: Match;
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', name: 'created_at' })
