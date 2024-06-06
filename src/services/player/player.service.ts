@@ -13,7 +13,7 @@ export class PlayerService {
 
     async getPlayerProfile(playerId: string) {
         const playerProfileRepo = new PlayerProfileRepository();
-        const profile = await playerProfileRepo.findOne({ where: { player: { playerId } }, relations: ['mainCharacters', 'mainWeapons', 'player'] });
+        const profile = await playerProfileRepo.findOneProfileByPlayerId(playerId);
         return profile;
     }
 

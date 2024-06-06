@@ -23,9 +23,21 @@ export class PlayerProfileRepository extends BaseRepository<PlayerProfile> {
     }
 
 
-    async findOne(args: FindOneOptions<PlayerProfile>) {
+    async findOneProfileByPlayerId(playerId: string) {
         try {
-            return await this._repo.findOne({ ...args })
+            return await this._repo.findOne({
+                where: {
+                    player: {
+                        playerId
+                    }
+                }, relations:
+                    [
+                        'mainCharacters',
+                        'mainWeapons',
+                        'player'
+                    ]
+            });
+
         } catch (error) {
             if (error instanceof Error) {
                 console.log(error.message);
