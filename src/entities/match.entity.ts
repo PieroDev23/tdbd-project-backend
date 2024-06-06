@@ -22,7 +22,7 @@ export class Match {
     @JoinColumn({ name: 'map_id' })
     map: Map;
 
-    @OneToMany(() => Team, (team) => team.players)
+    @OneToMany(() => Team, (team) => team.match)
     teams: Team[];
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', name: 'created_at' })
