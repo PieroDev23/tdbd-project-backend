@@ -27,7 +27,7 @@ export enum Leagues {
     GOLD = 'GOLD',
     PLAT = 'PLATINUM',
     DIAMOND = 'DIAMOND',
-    IMMORTAL = 'IMMORTAL',
+    INMORTAL = 'INMORTAL',
     RADIANT = 'RADIANT'
 }
 

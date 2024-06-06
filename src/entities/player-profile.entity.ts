@@ -24,17 +24,11 @@ export class PlayerProfile {
     @Column({ type: 'enum', nullable: false, enum: Leagues, default: Leagues.UNRANKED })
     league: string;
 
-    @OneToOne((type) => Agent, {
-        eager: true,
-        cascade: true
-    })
+    @OneToOne((type) => Agent)
     @JoinColumn({ name: 'main_character' })
     mainCharacter: Agent;
 
-    @OneToOne((type) => Weapon, {
-        eager: true,
-        cascade: true
-    })
+    @OneToOne((type) => Weapon)
     @JoinColumn({ name: 'main_weapon' })
     mainWeapon: Weapon;
 
