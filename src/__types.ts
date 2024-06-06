@@ -15,9 +15,9 @@ export enum WeaponTypes {
 
 export enum AgentRoles {
     DUELIST = 'DUELIST',
-    INITIATORS = 'INTIATORS',
-    SENTINELS = 'SENTINELS',
-    CONTROLLERS = 'CONTROLLERS'
+    INITIATOR = 'INITIATOR',
+    SENTINEL = 'SENTINEL',
+    CONTROLLER = 'CONTROLLER'
 }
 
 export enum Leagues {

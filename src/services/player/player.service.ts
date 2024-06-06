@@ -4,11 +4,8 @@ import { PlayerRepository } from "../../repositories";
 
 
 export class PlayerService {
-
-    async findPlayerByNickname(nickname: string) {
+    async getProfile(nickname: string) {
         const playerRepo = new PlayerRepository();
         return await playerRepo.findOneBy({ nickname });
     }
-
-
 }

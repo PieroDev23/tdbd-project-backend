@@ -18,8 +18,10 @@ export class PlayerProfileController extends BaseController {
         try {
             const { nickname } = req.body;
 
+            console.log(nickname);
+
             // find the player by username
-            const playerInfo = await this._ps.findPlayerByNickname(nickname);
+            const playerProfile = await this._ps.getProfile(nickname);
 
             // return profile information
             this.jsonResponse(res, {
@@ -27,7 +29,7 @@ export class PlayerProfileController extends BaseController {
                 response: {
                     ok: true,
                     message: HTTP_MESSAGES[HTTP_CODE_OK],
-                    playerInfo
+                    playerProfile
                 }
             });
 
