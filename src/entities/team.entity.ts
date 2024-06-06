@@ -1,5 +1,6 @@
 import { Column, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Player } from "./player.entity";
+import { Match } from "./match.entity";
 
 @Entity({ name: 'teams' })
 export class Team {
@@ -16,6 +17,9 @@ export class Team {
         inverseJoinColumn: { name: 'player_id', referencedColumnName: 'playerId' }
     })
     players: Player[];
+
+    @ManyToOne(type => Match, (match) => match.teams)
+    match: Match;
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', name: 'created_at' })
     createdAt: Date;
