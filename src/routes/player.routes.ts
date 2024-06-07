@@ -1,4 +1,5 @@
 import { MatchesHistoryController, PlayerProfileController } from "../controllers";
+import { CheckBanController } from "../controllers/player/check-ban.controller";
 import { GetRankingPlayers } from "../controllers/player/get-ranking-players.controller";
 import { BaseRouter } from "../models";
 
@@ -27,6 +28,11 @@ export class PlayerRouter extends BaseRouter {
                 path: 'get-ranking-players',
                 method: 'get',
                 controller: GetRankingPlayers
+            },
+            {
+                path: 'check-ban',
+                method: 'get',
+                controller: CheckBanController
             }
         ]
     }
