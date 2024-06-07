@@ -1,0 +1,1 @@
+export { WeaponsService } from './weapons.service';
