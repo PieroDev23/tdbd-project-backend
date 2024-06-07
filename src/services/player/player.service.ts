@@ -18,4 +18,9 @@ export class PlayerService {
     }
 
 
+    async getPlayerMatchesHistory(playerId: string) {
+        const playerRepo = new PlayerRepository();
+        const history = await playerRepo.findPlayerMatches(playerId);
+        return history;
+    }
 }

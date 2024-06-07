@@ -1,5 +1,4 @@
-import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { PlayerProfile } from './player-profile.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { TeamPlayer } from './teamPlayers.entity';
 
 @Entity({ name: 'players' })

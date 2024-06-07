@@ -17,6 +17,19 @@ export class PlayerRepository extends BaseRepository<Player> {
         }
     }
 
+
+    async findPlayerMatches(playerId: string): Promise<Player | null> {
+        try {
+            return await this._repo.findOne({ where: { playerId }, relations: ['playersByTeam', 'teamPlayerplayersByTeam.team', 'teamPlayerplayersByTeam.team.match', 'teamPlayerplayersByTeam.agent'] })
+        } catch (error) {
+            if (error instanceof Error) {
+                console.log(error.message);
+            }
+
+            return null
+        }
+    }
+
     create(args: Partial<Player>): Promise<Player> {
         throw new Error("Method not implemented.");
     }
