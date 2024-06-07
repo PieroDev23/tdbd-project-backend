@@ -26,7 +26,7 @@ export class MatchesHistoryController extends BaseController {
                 response: {
                     ok: true,
                     data: {
-                        matchHistory: matchHistory
+                        matchHistory
                     }
                 }
             });
