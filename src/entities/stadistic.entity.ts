@@ -5,7 +5,7 @@ import { Player } from "./player.entity";
 @Entity({ name: 'stadistics' })
 export class Stadistic {
     @PrimaryGeneratedColumn('uuid', { name: 'stadisctic_id' })
-    stadisticId: string;
+    statId: string;
 
     @Column({ type: 'int', default: '0' })
     deaths: number;

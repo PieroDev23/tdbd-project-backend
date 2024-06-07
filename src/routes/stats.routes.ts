@@ -15,7 +15,6 @@ export class StatsRouter extends BaseRouter {
                 path: 'get-player-match-stats',
                 controller: GetSingleStatsController,
                 method: 'get'
-
             }
         ];
     }
