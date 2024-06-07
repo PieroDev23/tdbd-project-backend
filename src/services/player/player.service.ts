@@ -1,4 +1,5 @@
 import { PlayerRepository } from "../../repositories";
+import { BlackListRepository } from "../../repositories/blackList.repository";
 import { PlayerProfileRepository } from "../../repositories/player-profile.repository";
 
 
@@ -27,6 +28,12 @@ export class PlayerService {
     async getPlayers() {
         const playerProfileRepo = new PlayerProfileRepository();
         return await playerProfileRepo.getAll();
+    }
+
+    async checkIfItsBan(playerId: string) {
+        const blackListRepo = new BlackListRepository();
+
+        return await blackListRepo.findOneBy({ })
     }
 
 }
