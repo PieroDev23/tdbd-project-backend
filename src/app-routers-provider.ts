@@ -1,6 +1,6 @@
 import { API_VERSION } from "./__constants";
 import { RoutesProvider } from "./models";
-import { AgentsRouter, AuthRouter, PlayerRouter } from "./routes";
+import { AgentsRouter, AuthRouter, PlayerRouter, WeaponsRouter } from "./routes";
 
 export class AppRoutersProvider extends RoutesProvider {
     apiVersion: string = API_VERSION;
@@ -11,7 +11,8 @@ export class AppRoutersProvider extends RoutesProvider {
         this.routers = [
             AuthRouter,
             PlayerRouter,
-            AgentsRouter
+            AgentsRouter,
+            WeaponsRouter
         ]
     }
 

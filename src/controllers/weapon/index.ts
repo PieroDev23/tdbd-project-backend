@@ -1,0 +1,1 @@
+export { GetWeaponsController } from './get-weapons.controller';

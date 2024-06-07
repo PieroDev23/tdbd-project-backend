@@ -1,38 +1,43 @@
 import { WeaponTypes } from "../../__types";
 import { Weapon } from "../../entities";
+import { WeaponsRepository } from "../../repositories/weapons.repository";
 
 
 interface WeaponGroups {
-    assaultRifle: Weapon[];
-    pistol: Weapon[];
-    sniper: Weapon[];
+    assaultRiffles: Weapon[];
+    pistols: Weapon[];
+    snipers: Weapon[];
 }
-
-
 
 export class WeaponsService {
 
-    groupAgentsByRole(agents: Weapon[]) {
+    async getWeapons() {
+        const weaponRepo = new WeaponsRepository();
+        const weapons = await weaponRepo.getAll();
+        return this.groupWeaponsByType(weapons);
+    }
 
-        return agents.reduce((groups: WeaponGroups, current: Weapon) => {
+    groupWeaponsByType(weapons: Weapon[]) {
+
+        return weapons.reduce((groups: WeaponGroups, current: Weapon) => {
             const { weaponType } = current;
 
             switch (weaponType) {
                 case WeaponTypes.PISTOL:
-                    groups.pistol.push(current);
+                    groups.pistols.push(current);
                     break;
                 case WeaponTypes.ASSAULT_RIFFLE:
-                    groups.assaultRifle.push(current);
+                    groups.assaultRiffles.push(current);
                     break;
                 case WeaponTypes.SNIPER:
-                    groups.sniper.push(current);
+                    groups.snipers.push(current);
                     break;
                 default:
                     break;
             }
 
             return groups;
-        }, { assaultRifle: [], pistol: [], sniper: [] });
+        }, { assaultRiffles: [], pistols: [], snipers: [] });
 
     }
 
