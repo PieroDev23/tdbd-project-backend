@@ -17,10 +17,9 @@ export class PlayerService {
         return profile;
     }
 
-
     async getPlayerMatchesHistory(playerId: string) {
         const playerRepo = new PlayerRepository();
-        const history = await playerRepo.findPlayerMatches(playerId);
+        const history = await playerRepo.getMatchesWithTeamsAndAgents(playerId);
         return history;
     }
 }

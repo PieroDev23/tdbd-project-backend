@@ -19,15 +19,14 @@ export class MatchesHistoryController extends BaseController {
         try {
             const { playerId } = req.body;
 
-            const player = await this._ps.getPlayerMatchesHistory(playerId);
-            console.log(player);
+            const matchHistory = await this._ps.getPlayerMatchesHistory(playerId);
 
             this.jsonResponse(res, {
                 code: HTTP_CODE_OK,
                 response: {
                     ok: true,
                     data: {
-                        playerId
+                        matchHistory: matchHistory
                     }
                 }
             });
