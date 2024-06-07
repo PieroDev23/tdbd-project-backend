@@ -1,7 +1,6 @@
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm"
-import { Player } from "./player.entity";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Match } from "./match.entity";
-import { Behaviors } from "../__types";
+import { Player } from "./player.entity";
 
 @Entity({ name: 'stadistics' })
 export class Stadistic {
@@ -26,14 +25,11 @@ export class Stadistic {
     @Column({ type: 'int', default: '0', name: 'loosing_rounds' })
     loosingRounds: number;
 
-    @Column({ type: 'enum', enum: Behaviors, default: Behaviors.NORMAL, name: 'player_behavior' })
-    playerBehavior: Behaviors;
-
-    @OneToOne((type) => Player, { eager: true, cascade: true })
+    @ManyToOne((type) => Player, (player) => player.stadisctic)
     @JoinColumn({ name: 'player_id' })
     player: Player;
 
-    @OneToOne((type) => Match, { eager: true, cascade: true })
+    @ManyToOne((type) => Match, (match) => match.stadistics)
     @JoinColumn({ name: 'match_id' })
     match: Match;
 

@@ -2,6 +2,7 @@ import { Column, Entity, JoinColumn, JoinTable, OneToMany, OneToOne, PrimaryGene
 import { GameModes } from "../__types";
 import { Map } from "./map.entity";
 import { Team } from "./team.entity";
+import { Stadistic } from "./stadistic.entity";
 
 @Entity({ name: 'matches' })
 export class Match {
@@ -24,6 +25,9 @@ export class Match {
 
     @OneToMany(() => Team, (team) => team.match)
     teams: Team[];
+
+    @OneToMany((type) => Stadistic, (stat) => stat.match)
+    stadistics: Stadistic[];
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', name: 'created_at' })
     createdAt: Date;

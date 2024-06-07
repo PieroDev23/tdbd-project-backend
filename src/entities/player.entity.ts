@@ -1,5 +1,6 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { TeamPlayer } from './teamPlayers.entity';
+import { Stadistic } from './stadistic.entity';
 
 @Entity({ name: 'players' })
 export class Player {
@@ -11,7 +12,10 @@ export class Player {
 
     @OneToMany(() => TeamPlayer, (teamPlayer) => teamPlayer)
     playersByTeam: TeamPlayer[];
-    
+
+    @OneToMany(() => Stadistic, (stadistic) => stadistic.player)
+    stadisctic: Stadistic[];
+
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', name: 'created_at' })
     createdAt: Date;
 
