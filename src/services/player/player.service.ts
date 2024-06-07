@@ -22,4 +22,11 @@ export class PlayerService {
         const history = await playerRepo.getMatchesWithTeamsAndAgents(playerId);
         return history;
     }
+
+
+    async getPlayers() {
+        const playerProfileRepo = new PlayerProfileRepository();
+        return await playerProfileRepo.getAll();
+    }
+
 }

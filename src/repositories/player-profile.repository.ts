@@ -23,6 +23,19 @@ export class PlayerProfileRepository extends BaseRepository<PlayerProfile> {
     }
 
 
+    async getAll() {
+        try {
+            return await this._repo.find({ relations: ['mainCharacters', 'mainWeapons', 'player'], order: { mmr: 'desc' } });
+        } catch (error) {
+            if (error instanceof Error) {
+                console.log(error.message);
+            }
+
+            return []
+        }
+    }
+
+
     async findOneProfileByPlayerId(playerId: string) {
         try {
             return await this._repo.findOne({
