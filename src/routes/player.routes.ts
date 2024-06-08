@@ -15,7 +15,7 @@ export class PlayerRouter extends BaseRouter {
 
         this.routes = [
             {
-                path: 'profile',
+                path: 'profile/:nickname',
                 method: 'get',
                 controller: PlayerProfileController,
             },

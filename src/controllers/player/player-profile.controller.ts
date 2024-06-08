@@ -16,7 +16,7 @@ export class PlayerProfileController extends BaseController {
 
     protected async response(req: TypedRequest<PlayerProfileRequest>, res: Response): Promise<any> {
         try {
-            const { nickname } = req.body;
+            const nickname = req.params.nickname;
 
             // find the player by username
             const player = await this._ps.getPlayerByNickname(nickname);
