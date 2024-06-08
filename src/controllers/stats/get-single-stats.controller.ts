@@ -1,9 +1,9 @@
 import { Response } from "express";
-import { TypedRequest } from "../../__types";
-import { BaseController } from "../../models";
-import { useService } from "../../helpers";
-import { StatsService } from "../../services/stats/stats.service";
 import { HTTP_CODE_OK } from "../../__constants";
+import { TypedRequest } from "../../__types";
+import { useService } from "../../helpers";
+import { BaseController } from "../../models";
+import { StatsService } from "../../services/stats/stats.service";
 
 
 
@@ -20,7 +20,8 @@ export class GetSingleStatsController extends BaseController {
     protected async response(req: TypedRequest<GetSingleStatsRequest>, res: Response<any, Record<string, any>>): Promise<any> {
 
         try {
-            const { playerId, matchId } = req.body;
+
+            const { playerId, matchId } = req.query
 
             const stats = await this._statsService.getStats(playerId, matchId);
 
