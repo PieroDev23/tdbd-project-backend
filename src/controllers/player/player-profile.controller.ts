@@ -41,9 +41,7 @@ export class PlayerProfileController extends BaseController {
                 response: {
                     ok: true,
                     message: HTTP_MESSAGES[HTTP_CODE_OK],
-                    data: {
-                        profile
-                    }
+                    profile
                 }
             });
 
