@@ -32,11 +32,6 @@ export class Match {
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', name: 'created_at' })
     createdAt: Date;
 
-    @OneToOne((type) => Team)
-    @JoinColumn({ name: 'winner_team_id' })
-    winnerTeam: Team;
-
-
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP', name: 'updated_at' })
     updatedAt: Date;
 }
