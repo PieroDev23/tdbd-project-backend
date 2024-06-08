@@ -33,7 +33,7 @@ export class PlayerService {
     async checkIfItsBan(playerId: string) {
         const blackListRepo = new BlackListRepository();
 
-        return await blackListRepo.findOneBy({ })
+        return await blackListRepo.findOneBy({ player: { playerId } });
     }
 
 }

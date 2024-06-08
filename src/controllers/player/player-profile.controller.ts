@@ -26,7 +26,7 @@ export class PlayerProfileController extends BaseController {
                     code: HTTP_CODE_CLIENT_ERROR,
                     response: {
                         ok: false,
-                        response: 'Player not finded',
+                        response: 'Player not founded',
                         data: null
                     }
                 })
