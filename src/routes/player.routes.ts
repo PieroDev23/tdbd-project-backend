@@ -20,7 +20,7 @@ export class PlayerRouter extends BaseRouter {
                 controller: PlayerProfileController,
             },
             {
-                path: 'matches-history',
+                path: 'matches-history/:playerId',
                 method: 'get',
                 controller: MatchesHistoryController
             },

@@ -17,7 +17,9 @@ export class MatchesHistoryController extends BaseController {
 
     protected async response(req: TypedRequest<MatchesHistoryRequest>, res: Response<any, Record<string, any>>): Promise<any> {
         try {
-            const { playerId } = req.body;
+
+            const { playerId } = req.params;
+
 
             const matchHistory = await this._ps.getPlayerMatchesHistory(playerId);
 
